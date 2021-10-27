@@ -1,4 +1,4 @@
-def  creeazaObiect(id,nume,descriere,pretachizitie,locatie):
+def  creeazaObiect(id:str,nume:str,descriere:str,pretachizitie:float,locatie:str):
     """
     creeaza un dictionar ce contine un obiect
     :param id: string
@@ -8,21 +8,17 @@ def  creeazaObiect(id,nume,descriere,pretachizitie,locatie):
     :param locatie: string
     :return: un dictionar ce contine un obiect
     """
-    return {
-        "id":id,
-        "nume":nume,
-        "descriere":descriere,
-        "pretachizitie":pretachizitie,
-        "locatie":locatie
-    }
 
-def getId(obiect):
+    list=[id,nume,descriere,pretachizitie,locatie]
+    return list
+
+def getId(list):
     """
     da id-ul unui obiect
     :param obiect: dictionar de contine un obiect
     :return: id-ul obiectului
     """
-    return obiect["id"]
+    return list[0]
 
 def getNume(obiect):
     """
@@ -30,7 +26,7 @@ def getNume(obiect):
     :param obiect:dictionar ce contine un obiect
     :return: numele obiectului
     """
-    return obiect["nume"]
+    return obiect[1]
 
 def getDescriere(obiect):
     """
@@ -38,7 +34,7 @@ def getDescriere(obiect):
     :param obiect:dictionar ce contine un obiect
     :return: descrierea obiectului
     """
-    return obiect["descriere"]
+    return obiect[2]
 
 def getPretachizitie(obiect):
     """
@@ -46,7 +42,7 @@ def getPretachizitie(obiect):
     :param obiect:dictionar ce contine un obiect
     :return: pretul de achizitie al obiectului
     """
-    return obiect["pretachizitie"]
+    return obiect[3]
 
 def getLocatie(obiect):
     """
@@ -54,7 +50,7 @@ def getLocatie(obiect):
     :param obiect:disctionar ce contine un obiect
     :return: locatia obiectului
     """
-    return obiect["locatie"]
+    return obiect[4]
 
 def toString(obiect):
     return "Id: {},Nume: {},Descriere: {}, Pretachizitie: {},Locatie: {}".format(

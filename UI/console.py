@@ -42,7 +42,7 @@ def showAll(list):
 
 
 def uiMutareObiecte(list):
-    loc=input("Dati locatia in care vreti s afie mutate toate obiectele: ")
+    loc=input("Dati locatia in care vreti sa fie mutate toate obiectele: ")
     return mutareaTuturorObiectelor(loc,list)
 
 
