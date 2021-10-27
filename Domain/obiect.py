@@ -20,43 +20,43 @@ def getId(list):
     """
     return list[0]
 
-def getNume(obiect):
+def getNume(lista):
     """
     da numele unui obiect
     :param obiect:dictionar ce contine un obiect
     :return: numele obiectului
     """
-    return obiect[1]
+    return lista[1]
 
-def getDescriere(obiect):
+def getDescriere(list):
     """
     da descrierea unui obiect
     :param obiect:dictionar ce contine un obiect
     :return: descrierea obiectului
     """
-    return obiect[2]
+    return list[2]
 
-def getPretachizitie(obiect):
+def getPretachizitie(list):
     """
     da pretul de achizitie al unui obiect
     :param obiect:dictionar ce contine un obiect
     :return: pretul de achizitie al obiectului
     """
-    return obiect[3]
+    return list[3]
 
-def getLocatie(obiect):
+def getLocatie(list):
     """
     da locatia obiectului
     :param obiect:disctionar ce contine un obiect
     :return: locatia obiectului
     """
-    return obiect[4]
+    return list[4]
 
-def toString(obiect):
+def toString(list):
     return "Id: {},Nume: {},Descriere: {}, Pretachizitie: {},Locatie: {}".format(
-        getId(obiect),
-        getNume(obiect),
-        getDescriere(obiect),
-        getPretachizitie(obiect),
-        getLocatie(obiect)
+        getId(list),
+        getNume(list),
+        getDescriere(list),
+        getPretachizitie(list),
+        getLocatie(list)
     )
