@@ -53,7 +53,7 @@ def getLocatie(list):
     return list[4]
 
 def toString(list):
-    return "Id: {},Nume: {},Descriere: {}, Pretachizitie: {},Locatie: {}".format(
+    return "Id: {},Nume: {}, Descriere: {}, Pretachizitie: {}, Locatie: {}".format(
         getId(list),
         getNume(list),
         getDescriere(list),
