@@ -7,6 +7,7 @@ def mutareaTuturorObiectelor(loc,list,loc1):
     :param list: o lista cu obiecte
     :return: lista dupa mutare
     """
+
     listNoua=[]
     for obiect in list:
         if getLocatie(obiect)==loc:
@@ -24,11 +25,11 @@ def mutareaTuturorObiectelor(loc,list,loc1):
 
 def concatenareString(string,list,valoare):
     """
-
-    :param string:
-    :param obiect:
-    :param valoare:
-    :return:
+    Concateneaza un string citit la toate descrieriile cu pretul mai mare decat o valoare citita
+    :param string: string
+    :param list: o lista de obiecte
+    :param valoare: float
+    :return: lista dupa ce a fost modificata descrierea obiectelor la toate obiectele cu pretul mai mare dacat o valoare data
     """
     listaNoua=[]
 
@@ -50,9 +51,9 @@ def concatenareString(string,list,valoare):
 
 def celMaiMarePretLocatii(list):
     """
-
-    :param list:
-    :return:
+    cel mai mare pret pentru fiecare locatie
+    :param list: o lista de obiecte
+    :return: pretul maxim pentru fiecare locatie
     """
     rezultat={}
     for obiect in list:
@@ -68,17 +69,17 @@ def celMaiMarePretLocatii(list):
 
 def ordonareDupaPret(list):
     """
-
-    :param list:
-    :return:
+    Ordonarea obiectelor crescator dupa pretul de achizitie
+    :param list: o lista de obiecte
+    :return: lista ordonata crescator dupa pretul de achizitie
     """
     return sorted(list, key= lambda obiect: getPretachizitie(obiect))
 
 def sumaPretPerLocatie(list):
     """
-
-    :param list:
-    :return:
+    sumele preturilor pentru fiecare locatie
+    :param list: o lista de obiecte
+    :return: suma preturilor pentru fiecare locatie
     """
     rezultat={}
 

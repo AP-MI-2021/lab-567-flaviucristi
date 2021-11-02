@@ -12,6 +12,8 @@ def adaugaObiect(id,nume,descriere,pretachizitie,locatie,list):
     :param list: lista de obiecte
     :return: o lista care contine atat elementele vechi, cat si obiectul nou
     """
+    if getById(id,list) is not None:
+        raise ValueError("Id-ul exista deja")
     obiect= creeazaObiect(id,nume,descriere,pretachizitie,locatie)
     return list + [obiect]
 
@@ -34,6 +36,8 @@ def stergeObiect(id,list):
     :param list: o lista cu obiecte
     :return: o lista de obiecte fara obiectul cu id-ul dat
     """
+    if getById(id,list) is None:
+        raise ValueError("Nu exista un obiect cu id-ul dat.")
     return [obiect for obiect in list if getId(obiect)!=id]
 
 def modificaObiect(id,nume,descriere,pretachizitie,locatie, list):
@@ -46,6 +50,8 @@ def modificaObiect(id,nume,descriere,pretachizitie,locatie, list):
     :param locatie: string
     :return: lista modificata
     """
+    if getById(id,list) is None:
+        raise ValueError("Nu exista un obiect cu id-ul dat.")
     listNoua=[]
     for obiect in list:
         if getId(obiect)== id:

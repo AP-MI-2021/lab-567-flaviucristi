@@ -4,6 +4,7 @@ from Logic.functionalitati import mutareaTuturorObiectelor, concatenareString, c
     sumaPretPerLocatie
 
 
+
 def printMenu():
     print("1. Adaugare obiect")
     print("2. Stergere obiect")
@@ -18,13 +19,18 @@ def printMenu():
 
 
 def uiAdaugaObiect(list):
-    id= input("Dati id-ul: ")
-    nume = input("Dati numele obiectului: ")
-    descriere= input("Dati descrierea obiectului: ")
-    pretachizitie=float(input("Dati pretul de achizitie: "))
-    locatie= input("Dati locatia obiectului: ")
-    return adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
-
+    try:
+        id= input("Dati id-ul: ")
+        nume = input("Dati numele obiectului: ")
+        descriere= input("Dati descrierea obiectului: ")
+        pretachizitie=float(input("Dati pretul de achizitie: "))
+        locatie= input("Dati locatia obiectului: ")
+        if len(locatie)<4 or len(locatie)>4:
+            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+        return adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return list
 
 def uiStergeObiect(list):
     id= input("Dati id-ul obiectului de sters: ")
@@ -32,13 +38,17 @@ def uiStergeObiect(list):
 
 
 def uiModificaObiect(list):
-    id = input("Dati id-ul obiectului de modificat: ")
-    nume = input("Dati noul nume al obiectului: ")
-    descriere = input("Dati noua descriere a obiectului: ")
-    pretachizitie = float(input("Dati noul pret de achizitie: "))
-    locatie = input("Dati noua locati a obiectului: ")
+    try:
+        id = input("Dati id-ul obiectului de modificat: ")
+        nume = input("Dati noul nume al obiectului: ")
+        descriere = input("Dati noua descriere a obiectului: ")
+        pretachizitie = float(input("Dati noul pret de achizitie: "))
+        locatie = input("Dati noua locati a obiectului: ")
 
-    return modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
+        return modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return list
 
 
 def showAll(list):
@@ -47,17 +57,31 @@ def showAll(list):
 
 
 def uiMutareObiecte(list):
-    loc=input("Dati locatia in care vreti sa fie mutate toate obiectele: ")
-    return mutareaTuturorObiectelor(loc,list)
+    try:
+        loc=input("Dati locatia din care vreti sa fie mutate toate obiectele: ")
+        if len(loc) < 4 or len(loc) > 4:
+            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+        loc1=input("Dati locatia in care vreti sa fie mutate toate obiectele din locatia data anterior: ")
+        if len(loc1) < 4 or len(loc1) > 4:
+            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+
+        return mutareaTuturorObiectelor(loc,list,loc1)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return list
 
 
 def uiConcatenareString(list):
-    string=input("Dati stringul pe care doriti sa il concatenati la descriere la obiectele cu pretul mai mare decat un pret dat: ")
-    valoare=int(input("Dati pretul: "))
+    try:
+        string=input("Dati stringul pe care doriti sa il concatenati la descriere la obiectele cu pretul mai mare decat un pret dat: ")
+        valoare=float(input("Dati pretul: "))
 
-    lista = concatenareString(string,list,valoare)
-    for obiect in lista:
-        print(toString(obiect))
+        lista = concatenareString(string,list,valoare)
+        for obiect in lista:
+            print(toString(obiect))
+    except ValueError as ve:
+        print("Eroare {}".format(ve))
+
 
 
 def uiCelMaiMarePretLocatii(list):
