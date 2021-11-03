@@ -1,5 +1,5 @@
-from Domain.obiect import toString
-from Logic.CRUD import adaugaObiect, stergeObiect, modificaObiect
+from Domain.obiect import toString, getNume, getDescriere, getPretachizitie, getLocatie
+from Logic.CRUD import adaugaObiect, stergeObiect, modificaObiect, getById
 from Logic.functionalitati import mutareaTuturorObiectelor, concatenareString, celMaiMarePretLocatii, ordonareDupaPret, \
     sumaPretPerLocatie
 
@@ -14,11 +14,12 @@ def printMenu():
     print("6. Determinarea celui mai mare preț pentru fiecare locație.")
     print("7. Ordonarea obiectelor crescător după prețul de achiziție.")
     print("8. Afișarea sumelor prețurilor pentru fiecare locație.")
+    print("u. Undo")
     print("a. Afisare obiecte")
     print("x. Iesire")
 
 
-def uiAdaugaObiect(list):
+def uiAdaugaObiect(list,undoOperations):
     try:
         id= input("Dati id-ul: ")
         nume = input("Dati numele obiectului: ")
@@ -27,25 +28,53 @@ def uiAdaugaObiect(list):
         locatie= input("Dati locatia obiectului: ")
         if len(locatie)<4 or len(locatie)>4:
             raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
-        return adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
+        rezultat = adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
+        undoOperations.append(lambda : stergeObiect(id,rezultat))
+        return rezultat
     except ValueError as ve:
         print("Eroare: {}".format(ve))
         return list
 
-def uiStergeObiect(list):
-    id= input("Dati id-ul obiectului de sters: ")
-    return stergeObiect(id,list)
+def uiStergeObiect(list,undoOperations):
+    try:
+        id= input("Dati id-ul obiectului de sters: ")
+        rezultat = stergeObiect(id,list)
+        obiectNou=getById(id,list)
+        undoOperations.append(lambda : adaugaObiect(
+            id,
+            getNume(obiectNou),
+            getDescriere(obiectNou),
+            getPretachizitie(obiectNou),
+            getLocatie(obiectNou),
+            rezultat
+        ))
+        return rezultat
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return list
 
 
-def uiModificaObiect(list):
+def uiModificaObiect(list,undoOperations):
     try:
         id = input("Dati id-ul obiectului de modificat: ")
         nume = input("Dati noul nume al obiectului: ")
         descriere = input("Dati noua descriere a obiectului: ")
         pretachizitie = float(input("Dati noul pret de achizitie: "))
         locatie = input("Dati noua locati a obiectului: ")
+        if len(locatie)<4 or len(locatie)>4:
+            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
 
-        return modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
+        rezultat = modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
+        obiectVechi=getById(id,list)
+        undoOperations.append(lambda :modificaObiect(
+            id,
+            getNume(obiectVechi),
+            getDescriere(obiectVechi),
+            getPretachizitie(obiectVechi),
+            getLocatie(obiectVechi),
+            rezultat
+        ))
+        return rezultat
     except ValueError as ve:
         print("Eroare: {}".format(ve))
         return list
@@ -76,11 +105,11 @@ def uiConcatenareString(list):
         string=input("Dati stringul pe care doriti sa il concatenati la descriere la obiectele cu pretul mai mare decat un pret dat: ")
         valoare=float(input("Dati pretul: "))
 
-        lista = concatenareString(string,list,valoare)
-        for obiect in lista:
-            print(toString(obiect))
+        return concatenareString(string,list,valoare)
+
     except ValueError as ve:
         print("Eroare {}".format(ve))
+        return list
 
 
 
@@ -103,26 +132,30 @@ def uiSumaPretPerLocatie(list):
 
 
 def runMenu(list):
+    undoOperations=[]
     while True:
         printMenu()
         optiune=input("Dati optiunea: ")
 
         if optiune=="1":
-            list=uiAdaugaObiect(list)
+            list=uiAdaugaObiect(list,undoOperations)
         elif optiune=="2":
-            list=uiStergeObiect(list)
+            list=uiStergeObiect(list,undoOperations)
         elif optiune=="3":
-            list=uiModificaObiect(list)
+            list=uiModificaObiect(list,undoOperations)
         elif optiune=="4":
             list=uiMutareObiecte(list)
         elif optiune=="5":
-            uiConcatenareString(list)
+            list=uiConcatenareString(list)
         elif optiune=="6":
             uiCelMaiMarePretLocatii(list)
         elif optiune=="7":
             uiOrdonareDupaPret(list)
         elif optiune=="8":
             uiSumaPretPerLocatie(list)
+        elif optiune=="u":
+            if len(undoOperations)>0:
+                list= undoOperations.pop()()
         elif optiune=="a":
             showAll(list)
         elif optiune=="x":
