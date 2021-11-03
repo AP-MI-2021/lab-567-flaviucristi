@@ -26,8 +26,7 @@ def uiAdaugaObiect(list,undoOperations):
         descriere= input("Dati descrierea obiectului: ")
         pretachizitie=float(input("Dati pretul de achizitie: "))
         locatie= input("Dati locatia obiectului: ")
-        if len(locatie)<4 or len(locatie)>4:
-            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+
         rezultat = adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
         undoOperations.append(lambda : stergeObiect(id,rezultat))
         return rezultat
@@ -61,8 +60,6 @@ def uiModificaObiect(list,undoOperations):
         descriere = input("Dati noua descriere a obiectului: ")
         pretachizitie = float(input("Dati noul pret de achizitie: "))
         locatie = input("Dati noua locati a obiectului: ")
-        if len(locatie)<4 or len(locatie)>4:
-            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
 
         rezultat = modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
         obiectVechi=getById(id,list)

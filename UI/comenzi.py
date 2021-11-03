@@ -31,8 +31,7 @@ def comenzi(list):
                         descriere=comanda_adaugata[3]
                         pretachizitie=float(comanda_adaugata[4])
                         locatie=comanda_adaugata[5]
-                        if len(locatie) < 4 or len(locatie) > 4:
-                            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+
                         list= adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
                     elif comanda_adaugata[0]=="delete":
                         id=comanda_adaugata[1]
@@ -43,8 +42,7 @@ def comenzi(list):
                         descriere = comanda_adaugata[3]
                         pretachizitie = float(comanda_adaugata[4])
                         locatie = comanda_adaugata[5]
-                        if len(locatie) < 4 or len(locatie) > 4:
-                            raise ValueError("Locatia trebuia sa aiba exact 4 litere.")
+
                         list=modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
                     elif comanda_adaugata[0]=="showall":
                         showAll(list)
