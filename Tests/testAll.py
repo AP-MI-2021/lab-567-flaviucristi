@@ -1,7 +1,8 @@
-from Tests.testCRUD import testAdaugaObiect, testStergeObiect, testModificaObiect
+from Tests.testCRUD import testAdaugaObiect, testStergeObiect, testModificaObiect, testUndoRedo, testStergereUndoRedo, \
+    testModificareUndoRedo
 from Tests.testDomain import testObiect
 from Tests.testFunctionalitati import testMutareaTuturorObiectelor, testConcatenareString, testCelMaiMarePretLocatii, \
-    testOrdonareDupaPret, testSumaPretPerLocatie, testUndoRedo
+    testOrdonareDupaPret, testSumaPretPerLocatie, testMutareaTuturorObiectelorUndoRedo, testConcatenareStringUndoRedo
 
 
 def runAllTests():
@@ -15,3 +16,7 @@ def runAllTests():
     testOrdonareDupaPret()
     testSumaPretPerLocatie()
     testUndoRedo()
+    testStergereUndoRedo()
+    testModificareUndoRedo()
+    testMutareaTuturorObiectelorUndoRedo()
+    testConcatenareStringUndoRedo()
