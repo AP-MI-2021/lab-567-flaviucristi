@@ -25,6 +25,8 @@ def comenzi(list):
                 comenzi=comanda.split(";")
                 for i in range(len(comenzi)):
                     comanda_adaugata= comenzi[i].split(",")
+
+
                     if comanda_adaugata[0]=="add":
                         id=comanda_adaugata[1]
                         nume=comanda_adaugata[2]
@@ -33,9 +35,14 @@ def comenzi(list):
                         locatie=comanda_adaugata[5]
 
                         list= adaugaObiect(id,nume,descriere,pretachizitie,locatie,list)
+
+
                     elif comanda_adaugata[0]=="delete":
                         id=comanda_adaugata[1]
+
                         list=stergeObiect(id,list)
+
+
                     elif comanda_adaugata[0]=="update":
                         id = comanda_adaugata[1]
                         nume = comanda_adaugata[2]
@@ -44,6 +51,8 @@ def comenzi(list):
                         locatie = comanda_adaugata[5]
 
                         list=modificaObiect(id,nume,descriere,pretachizitie,locatie,list)
+
+
                     elif comanda_adaugata[0]=="showall":
                         showAll(list)
                     else:
